@@ -1,0 +1,235 @@
+/* Modern CSS Reset and Base Styles */
+:root {
+    /* Color Palette - Premium Dark Theme */
+    --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    
+    /* Button Colors */
+    --btn-number-bg: rgba(255, 255, 255, 0.15);
+    --btn-operator-bg: rgba(255, 126, 95, 0.2);
+    --btn-operator-text: #ff7e5f;
+    --btn-equals-bg: linear-gradient(45deg, #ff7e5f, #feb47b);
+    --btn-special-bg: rgba(255, 255, 255, 0.05);
+    
+    /* Typography */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-gradient);
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+/* Calculator Container */
+.calculator-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.calculator {
+    width: 380px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Display Section */
+.display {
+    height: 120px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.previous-operand {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    min-height: 1.5rem;
+}
+
+.current-operand {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* Grid for Buttons */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    height: 64px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+button:active {
+    transform: scale(0.95);
+    filter: brightness(1.2);
+}
+
+button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Variants */
+.btn-number {
+    background: var(--btn-number-bg);
+}
+
+.btn-operator {
+    background: var(--btn-operator-bg);
+    color: var(--btn-operator-text);
+}
+
+.btn-special {
+    background: var(--btn-special-bg);
+}
+
+.btn-equals {
+    background: var(--btn-equals-bg);
+    grid-column: span 2;
+}
+
+.btn-ac {
+    grid-column: span 2;
+    background: rgba(255, 71, 87, 0.2);
+    color: #ff4757;
+}
+
+/* History Panel */
+.history-toggle {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+
+.history-panel {
+    position: absolute;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 20px;
+    transition: transform 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-panel.active {
+    transform: translateX(-340px);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.history-item .calc {
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.history-item .res {
+    color: var(--btn-operator-text);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.clear-history {
+    margin-top: 10px;
+    background: rgba(255, 71, 87, 0.2);
+    color: #ff4757;
+    font-size: 0.8rem;
+    height: 36px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}

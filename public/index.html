@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmos | Premium MVC Calculator</title>
+    <meta name="description" content="A premium web-based calculator with MVC architecture and persistent history.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- The main area where the calculator lives -->
+    <div class="calculator-wrapper">
+        <!-- The button used to open the history side panel -->
+        <button class="history-toggle" id="history-toggle">History</button>
+
+        <!-- The actual calculator box -->
+        <main class="calculator">
+            <!-- The screen where numbers are shown -->
+            <section class="display">
+                <div id="previous-operand" class="previous-operand"></div>
+                <div id="current-operand" class="current-operand">0</div>
+            </section>
+
+            <!-- The grid of buttons (numbers and math symbols) -->
+            <section class="buttons-grid">
+                <!-- 'AC' wipes the screen, 'DEL' acts as a backspace -->
+                <button class="btn-ac" data-action="clear">AC</button>
+                <button class="btn-special" data-action="delete">DEL</button>
+                <button class="btn-operator" data-action="operator" data-value="/">÷</button>
+                
+                <button class="btn-number" data-value="7">7</button>
+                <button class="btn-number" data-value="8">8</button>
+                <button class="btn-number" data-value="9">9</button>
+                <button class="btn-operator" data-action="operator" data-value="*">×</button>
+                
+                <button class="btn-number" data-value="4">4</button>
+                <button class="btn-number" data-value="5">5</button>
+                <button class="btn-number" data-value="6">6</button>
+                <button class="btn-operator" data-action="operator" data-value="-">−</button>
+                
+                <button class="btn-number" data-value="1">1</button>
+                <button class="btn-number" data-value="2">2</button>
+                <button class="btn-number" data-value="3">3</button>
+                <button class="btn-operator" data-action="operator" data-value="+">+</button>
+                
+                <button class="btn-number" data-value=".">.</button>
+                <button class="btn-number" data-value="0">0</button>
+                <!-- '=' tells the calculator to give the final answer -->
+                <button class="btn-equals" data-action="calculate">=</button>
+            </section>
+        </main>
+
+        <!-- The side panel that slides out to show old calculations -->
+        <aside class="history-panel" id="history-panel">
+            <div class="history-header">
+                <h3>History</h3>
+                <button id="close-history" style="background:none; font-size: 1.5rem; height: auto; width: auto; padding: 0;">&times;</button>
+            </div>
+            <!-- This is where the saved calculations will be listed -->
+            <div class="history-list" id="history-list"></div>
+            <!-- Button to delete all saved math history -->
+            <button class="clear-history" id="clear-history">Clear History</button>
+        </aside>
+    </div>
+
+    <!-- MVC Scripts -->
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="controller.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
